@@ -11,7 +11,7 @@ def speak(str):
 
 if __name__ == '__main__':
         speak("Good Morning!!  Top Headlines is....")
-        r=requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=c465f7fbde114936bc54e6db79ce4786")
+        r=requests.get("https://newsapi.org/v2/top-headlines?country=in&apiKey=YOUR_API_KEY")
         b=r.text
         rstr_json=r.json()
         json_format=json.dumps(rstr_json)
