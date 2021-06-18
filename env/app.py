@@ -22,7 +22,8 @@ class Todo(db.Model):
 
 
 
-# DEclare the app
+# start the app by creating endpoints
+
 
 @app.route('/',methods=['GET','POST'])
 def hello():
@@ -42,15 +43,12 @@ def update(sno):
     if request.method =='POST':
         todo.title=request.form['title']
         todo.desc=request.form['desc']
-        # todo=Todo.query.filter_by(sno=int(sno)).first()
-        # record.title=title
-        # record.desc=desc
         todo=db.session.merge(todo)
-        # db.session.add(todo)
+        db.session.add(todo)
         db.session.commit()
-        print(("sucess"))
-        # render_template('index.html',todo=todo)
-    return render_template('update.html', todo=str(todo))
+        # print(("sucess"))
+        return redirect('/')
+    return render_template('update.html', todo=todo,sno=sno)
 
 
 @app.route('/delete/<int:sno>')
@@ -59,6 +57,10 @@ def delete(sno):
     db.session.delete(todo)
     db.session.commit()
     return redirect('/')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 
